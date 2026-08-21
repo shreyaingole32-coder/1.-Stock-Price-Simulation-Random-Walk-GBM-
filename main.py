@@ -31,9 +31,7 @@ NUM_SIMULATIONS = 100
 SEED = 42
 
 
-# ============================================================
-# 1. DOWNLOAD REAL STOCK DATA
-# ============================================================
+
 
 print(f"Downloading data for {TICKER}...")
 
@@ -53,9 +51,7 @@ close_prices = close_prices.dropna()
 returns = calculate_returns(data)
 
 
-# ============================================================
-# 2. CALCULATE MARKET PARAMETERS
-# ============================================================
+
 
 statistics = calculate_statistics(
     returns.values
@@ -84,10 +80,6 @@ print(
 )
 
 
-# ============================================================
-# 3. RANDOM WALK SIMULATION
-# ============================================================
-
 random_walk_paths = simulate_random_walk(
     initial_price=initial_price,
     num_days=num_days,
@@ -96,10 +88,6 @@ random_walk_paths = simulate_random_walk(
     seed=SEED
 )
 
-
-# ============================================================
-# 4. GBM SIMULATION
-# ============================================================
 
 gbm_paths = simulate_gbm(
     initial_price=initial_price,
@@ -111,9 +99,6 @@ gbm_paths = simulate_gbm(
 )
 
 
-# ============================================================
-# 5. CALCULATE EXPECTED SIMULATED PATH
-# ============================================================
 
 random_walk_mean = np.mean(
     random_walk_paths,
@@ -128,9 +113,6 @@ gbm_mean = np.mean(
 actual_prices = close_prices.values
 
 
-# ============================================================
-# 6. ERROR METRICS
-# ============================================================
 
 random_walk_rmse = calculate_rmse(
     actual_prices,
@@ -177,10 +159,6 @@ print(
 )
 
 
-# ============================================================
-# 7. VISUALIZE RANDOM WALK
-# ============================================================
-
 plot_simulations(
     random_walk_paths,
     "Random Walk Stock Price Simulations",
@@ -188,9 +166,6 @@ plot_simulations(
 )
 
 
-# ============================================================
-# 8. VISUALIZE GBM
-# ============================================================
 
 plot_simulations(
     gbm_paths,
@@ -199,9 +174,7 @@ plot_simulations(
 )
 
 
-# ============================================================
-# 9. FINAL COMPARISON
-# ============================================================
+
 
 plot_comparison(
     actual_prices=actual_prices,
